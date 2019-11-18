@@ -1,5 +1,5 @@
 import React from 'react';
-import GithubSearch from './components/GithubSearch';
+import GithubSearchHooks from './components/GithubSearchHooks';
 import './App.css';
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
 			</div>
 			<div className="row">
 				<div className="col-12">
-					<GithubSearch />
+					<GithubSearchHooks />
 				</div>
 			</div>
 		</div>

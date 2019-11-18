@@ -1,0 +1,12 @@
+.GithubItemHooks {
+	margin-top: 10px;
+}
+.GithubItemHooks .avatar {
+	background-size: cover;
+	height: 60px;
+}
+
+.GithubItemHooks .name {
+	margin-top: 15px;
+	font-size: 18px;
+}
