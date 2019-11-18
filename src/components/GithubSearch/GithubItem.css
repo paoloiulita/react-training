@@ -1,0 +1,12 @@
+.GithubItem {
+	margin-top: 10px;
+}
+.GithubItem .avatar {
+	background-size: cover;
+	height: 60px;
+}
+
+.GithubItem .name {
+	margin-top: 15px;
+	font-size: 18px;
+}
