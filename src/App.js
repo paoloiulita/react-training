@@ -1,5 +1,6 @@
 import React from 'react';
-import GithubSearchHooks from './components/GithubSearchHooks';
+import GithubSearch from './components/GithubSearch';
+import UserList from './components/UserList';
 import './App.css';
 
 function App() {
@@ -13,8 +14,17 @@ function App() {
 				</div>
 			</div>
 			<div className="row">
+				<div className="col-6">
+					<GithubSearch />
+				</div>
+				<div className="col-6">
+					<GithubSearch />
+				</div>
+			</div>
+			<hr />
+			<div className="row">
 				<div className="col-12">
-					<GithubSearchHooks />
+					<UserList />
 				</div>
 			</div>
 		</div>

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import { toggleUser } from '../../actions'
 import GithubItem from './GithubItem';
 
 class GithubSearch extends Component {
@@ -6,9 +8,11 @@ class GithubSearch extends Component {
 		super(props);
 		this.updateToken = this.updateToken.bind(this);
 		this.onClick = this.onClick.bind(this);
+		this.loadData = this.loadData.bind(this);
+		this.itemClick = this.itemClick.bind(this);
 	};
 	state = {
-		token: '',
+		token: 'joe',
 		loading: false,
 		searchPerformed: false,
 		list: []
@@ -19,11 +23,14 @@ class GithubSearch extends Component {
 		});
 	};
 	onClick(event) {
-		const { token } = this.state;
 		this.setState({
 			loading: true,
 			searchPerformed: true
 		});
+		this.loadData();
+	};
+	loadData() {
+		const { token } = this.state;
 		fetch('https://api.github.com/search/users?q=' + token)
 			.then(resp => resp.json())
 			.then(resp => {
@@ -32,6 +39,9 @@ class GithubSearch extends Component {
 					list: resp.items
 				});
 			});
+	};
+	itemClick(user) {	
+		this.props.toggleUser(user);
 	};
 	render() {
 		const { loading, token, list, searchPerformed } = this.state;
@@ -57,8 +67,8 @@ class GithubSearch extends Component {
 						</div>
 					}
 					{!loading &&
-						list.length > 0 && list.map(person => (<div className="col-12">
-							<GithubItem person={person} />
+						list.length > 0 && list.map(p => (<div key={p.id} className="col-12">
+							<GithubItem onClick={this.itemClick} person={p} />
 						</div>))
 					}
 					{!loading && searchPerformed &&
@@ -70,4 +80,13 @@ class GithubSearch extends Component {
 	}
 }
 
-export default GithubSearch;
+// export default GithubSearch;
+
+const mapDispatchToProps = (dispatch, payload) => ({
+  toggleUser: payload => dispatch(toggleUser(payload))
+})
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(GithubSearch)
