@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import GithubItemHooks from './GithubItemHooks';
 
 const GithubSearchHooks = props => {
-	const [token, setToken] = useState('');
+	const [token, setToken] = useState('joe');
 	const [loading, setLoading] = useState(false);
 	const [searchPerformed, setSearchPerformed] = useState(false);
 	const [list, setList] = useState([]);
@@ -10,6 +10,9 @@ const GithubSearchHooks = props => {
 	const onClick = event => {
 		setLoading(true);
 		setSearchPerformed(true);
+		loadData();
+	};
+	const loadData = _ => {
 		fetch('https://api.github.com/search/users?q=' + token)
 			.then(resp => resp.json())
 			.then(resp => {
