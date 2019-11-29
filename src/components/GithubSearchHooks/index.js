@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { toggleUser } from '../../actions';
 import GithubItemHooks from './GithubItemHooks';
 
 const GithubSearchHooks = props => {
@@ -19,6 +21,9 @@ const GithubSearchHooks = props => {
 				setLoading(false);
 				setList(resp.items);
 			});
+	};
+	const itemClick = user => {
+		props.toggleUser(user);
 	};
 	return (
 		<div className="GithubSearchHooks container">
@@ -42,8 +47,8 @@ const GithubSearchHooks = props => {
 					</div>
 				}
 				{!loading &&
-					list.length > 0 && list.map(person => (<div className="col-12">
-						<GithubItemHooks person={person} />
+					list.length > 0 && list.map(person => (<div key={person.id} className="col-12">
+						<GithubItemHooks onClick={itemClick} person={person} />
 					</div>))
 				}
 				{!loading && searchPerformed &&
@@ -54,4 +59,11 @@ const GithubSearchHooks = props => {
 	)
 }
 
-export default GithubSearchHooks;
+const mapDispatchToProps = (dispatch, payload) => ({
+  toggleUser: payload => dispatch(toggleUser(payload))
+})
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(GithubSearchHooks);
