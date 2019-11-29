@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './GithubItem.css'
+import './GithubItem.css';
 
 class GithubItem extends Component {
 	constructor(props) {

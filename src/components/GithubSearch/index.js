@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import { toggleUser } from '../../actions'
+import { connect } from 'react-redux';
+import { toggleUser } from '../../actions';
 import GithubItem from './GithubItem';
 
 class GithubSearch extends Component {
